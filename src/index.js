@@ -14,7 +14,20 @@ const countModifier = (count = 0, action) => {
     return count;
   }
 };
-
 const countStore = createStore(countModifier);
+countStore.subscribe(() => {
+  number.innerText = countStore.getState();
+});
 
-console.log(countStore.getState());
+const handleAdd = () => {
+  countStore.dispatch({ type: "ADD" });
+  console.log(countStore.getState());
+};
+
+const handleMinus = () => {
+  countStore.dispatch({ type: "MINUS" });
+  console.log(countStore.getState());
+};
+
+plus.addEventListener("click", handleAdd);
+minus.addEventListener("click", handleMinus);
